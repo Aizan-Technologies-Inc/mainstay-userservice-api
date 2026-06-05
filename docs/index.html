@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aizan Mainstay UserService API Documentation</title>
+    <meta
+      name="description"
+      content="GitHub Pages documentation for the Aizan Mainstay UserService API."
+    />
+    <link rel="icon" href="assets/aizan-logo.svg" />
+    <link rel="stylesheet" href="styles.css?v=userservice-1" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="sidebar" aria-label="Mainstay UserService sections">
+        <a class="brand" href="#create-user" aria-label="Aizan documentation home">
+          <img src="assets/aizan-logo.svg" alt="Aizan" width="112" height="56" />
+        </a>
+
+        <nav class="section-nav">
+          <a class="is-active" href="#create-user">Create User</a>
+          <a href="#list-users">List Users</a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <span>Powered by</span>
+          <strong>Theneo</strong>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <label class="search" aria-label="Search sections">
+            <span class="search-icon" aria-hidden="true"></span>
+            <input id="section-search" type="search" placeholder="Search" />
+            <kbd>/</kbd>
+          </label>
+          <nav class="top-links" aria-label="Project links">
+            <a href="#api-explorer">API explorer</a>
+            <a href="#changelog">Changelog</a>
+          </nav>
+          <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <span aria-hidden="true"></span>
+          </button>
+        </header>
+
+        <section class="doc-section" id="create-user">
+          <div class="doc-copy">
+            <h1>Create User</h1>
+            <p>
+              This section allows users to create new user profiles within the
+              Mainstay User Service API. By providing essential user information
+              and attributes, users can add individuals to the user pool
+              efficiently.
+            </p>
+            <p>
+              This functionality streamlines onboarding new users and managing
+              their access within the system.
+            </p>
+
+            <h4>Header Parameters</h4>
+            <div class="param-list">
+              <div>
+                <code>x-api-key</code>
+                <span>string</span>
+                <p>API key for authentication.</p>
+              </div>
+              <div>
+                <code>Content-Type</code>
+                <span>string</span>
+                <p>The type of content in the request.</p>
+              </div>
+            </div>
+
+            <h4>Query Parameters</h4>
+            <div class="param-list">
+              <div>
+                <code>PaginationToken</code>
+                <span>string</span>
+                <p>Token used for pagination of results.</p>
+              </div>
+            </div>
+
+            <h4>Body Parameters</h4>
+            <div class="param-list">
+              <div>
+                <code>UserPoolId</code>
+                <span>string</span>
+                <p>The ID of the user pool.</p>
+              </div>
+              <div>
+                <code>Username</code>
+                <span>string</span>
+                <p>The username of the user.</p>
+              </div>
+              <div>
+                <code>DesiredDeliveryMediums</code>
+                <span>array</span>
+                <p>The preferred delivery methods for messages.</p>
+              </div>
+              <div>
+                <code>MessageAction</code>
+                <span>string</span>
+                <p>Action to be taken on the message.</p>
+              </div>
+              <div>
+                <code>TemporaryPassword</code>
+                <span>string</span>
+                <p>Temporary password for the user.</p>
+              </div>
+              <div>
+                <code>UserAttributes</code>
+                <span>array</span>
+                <p>Attributes associated with the user.</p>
+              </div>
+            </div>
+
+            <div class="feedback" aria-label="Section feedback">
+              <span>Was this section helpful?</span>
+              <button type="button">Yes</button>
+              <button type="button">No</button>
+            </div>
+          </div>
+
+          <aside class="example-stack" aria-label="Create User examples">
+            <div class="info-card">
+              <div class="card-title">Base URL</div>
+              <dl class="url-list">
+                <div>
+                  <dt>Development:</dt>
+                  <dd>https://pzjct85e0b.execute-api.ca-central-1.amazonaws.com/Development/</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="language-card">
+              <div class="card-title">Language Box</div>
+              <div class="language-grid">
+                <button class="language-choice is-active" type="button" data-language-tab="create-user" data-language="curl"><span class="curl-mark">curl://</span><span>cURL</span></button>
+                <button class="language-choice" type="button" data-language-tab="create-user" data-language="ruby"><img src="https://app.theneo.io/icons/icons8-ruby-programming-language.svg" alt="" /><span>Ruby</span></button>
+                <button class="language-choice" type="button" data-language-tab="create-user" data-language="python"><img src="https://app.theneo.io/icons/icons8-python.svg" alt="" /><span>Python</span></button>
+                <button class="language-choice" type="button" data-language-tab="create-user" data-language="php"><img src="https://app.theneo.io/icons/icons8-php-logo.svg" alt="" /><span>PHP</span></button>
+                <button class="language-choice" type="button" data-language-tab="create-user" data-language="java"><img src="https://app.theneo.io/icons/icons8-java.svg" alt="" /><span>Java</span></button>
+                <button class="language-choice" type="button" data-language-tab="create-user" data-language="node"><img src="https://app.theneo.io/icons/icons8-nodejs.svg" alt="" /><span>Node.js</span></button>
+                <button class="language-choice" type="button" data-language-tab="create-user" data-language="go"><img src="https://app.theneo.io/icons/go-logo-blue.svg" alt="" /><span>Go</span></button>
+                <button class="language-choice" type="button" data-language-tab="create-user" data-language="dotnet"><img src="https://app.theneo.io/icons/microsoft-dot-net.webp" alt="" /><span>.NET</span></button>
+              </div>
+            </div>
+
+            <div class="code-card endpoint-card" data-snippet="create-user">
+              <div class="endpoint-card-header">
+                <div>
+                  <span class="method post">POST</span>
+                  <strong>/create-users?PaginationToken=abc123</strong>
+                </div>
+                <label>
+                  <span class="sr-only">Request language</span>
+                  <select data-language-select="create-user" aria-label="Request language">
+                    <option value="curl">cURL</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="python">Python</option>
+                    <option value="php">PHP</option>
+                    <option value="java">Java</option>
+                    <option value="node">Node.js</option>
+                    <option value="go">Go</option>
+                    <option value="dotnet">.NET</option>
+                  </select>
+                </label>
+                <button type="button" data-copy="create-user-request">Copy</button>
+              </div>
+              <pre id="create-user-request"><code></code></pre>
+              <div class="try-row">
+                <button type="button">Try in API Explorer</button>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="doc-section" id="list-users">
+          <div class="doc-copy">
+            <h1>List Users</h1>
+            <p>
+              The List Users section of the MainstayUserServiceAPI allows users
+              to retrieve a list of users based on specified criteria.
+            </p>
+            <p>
+              Users can access information such as attributes, filters, and
+              limits to customize the results according to their needs.
+            </p>
+
+            <h4>Header Parameters</h4>
+            <div class="param-list">
+              <div>
+                <code>x-api-key</code>
+                <span>string</span>
+                <p>The API key used for authentication and authorization purposes.</p>
+              </div>
+              <div>
+                <code>Content-Type</code>
+                <span>string</span>
+                <p>Indicates the media type of the request content, typically set to application/json.</p>
+              </div>
+            </div>
+
+            <h4>Body Parameters</h4>
+            <div class="param-list">
+              <div>
+                <code>AttributesToGet</code>
+                <span>array</span>
+                <p>Specifies the attributes to retrieve for each user in the list.</p>
+              </div>
+              <div>
+                <code>Filter</code>
+                <span>string</span>
+                <p>Allows filtering the list of users based on specific criteria.</p>
+              </div>
+              <div>
+                <code>Limit</code>
+                <span>number</span>
+                <p>Sets a limit on the number of users to be returned in the list.</p>
+              </div>
+              <div>
+                <code>UserPoolId</code>
+                <span>string</span>
+                <p>Identifies the user pool from which to list users.</p>
+              </div>
+            </div>
+
+            <div class="feedback" aria-label="Section feedback">
+              <span>Was this section helpful?</span>
+              <button type="button">Yes</button>
+              <button type="button">No</button>
+            </div>
+          </div>
+
+          <aside class="example-stack" aria-label="List Users examples">
+            <div class="code-card endpoint-card" data-snippet="list-users">
+              <div class="endpoint-card-header">
+                <div>
+                  <span class="method post">POST</span>
+                  <strong>/list-users</strong>
+                </div>
+                <label>
+                  <span class="sr-only">Request language</span>
+                  <select data-language-select="list-users" aria-label="Request language">
+                    <option value="curl">cURL</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="python">Python</option>
+                    <option value="php">PHP</option>
+                    <option value="java">Java</option>
+                    <option value="node">Node.js</option>
+                    <option value="go">Go</option>
+                    <option value="dotnet">.NET</option>
+                  </select>
+                </label>
+                <button type="button" data-copy="list-users-request">Copy</button>
+              </div>
+              <pre id="list-users-request"><code></code></pre>
+              <div class="try-row">
+                <button type="button">Try in API Explorer</button>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js?v=userservice-1"></script>
+  </body>
+</html>
+
