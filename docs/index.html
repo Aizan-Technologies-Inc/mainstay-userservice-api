@@ -9,7 +9,7 @@
       content="GitHub Pages documentation for the Aizan Mainstay UserService API."
     />
     <link rel="icon" href="assets/aizan-logo.svg" />
-    <link rel="stylesheet" href="styles.css?v=userservice-1" />
+    <link rel="stylesheet" href="styles.css?v=userservice-2" />
   </head>
   <body>
     <div class="page-shell">
@@ -97,7 +97,7 @@
               <div>
                 <code>DesiredDeliveryMediums</code>
                 <span>array</span>
-                <p>The preferred delivery methods for messages.</p>
+                <p>Array of delivery medium strings, such as <code>EMAIL</code> or <code>SMS</code>. The example request uses an empty array.</p>
               </div>
               <div>
                 <code>MessageAction</code>
@@ -112,7 +112,7 @@
               <div>
                 <code>UserAttributes</code>
                 <span>array</span>
-                <p>Attributes associated with the user.</p>
+                <p>Array of objects with <code>Name</code> and <code>Value</code> string fields, for example <code>{ "Name": "email", "Value": "user@example.com" }</code>.</p>
               </div>
             </div>
 
@@ -128,10 +128,14 @@
               <div class="card-title">Base URL</div>
               <dl class="url-list">
                 <div>
-                  <dt>Development:</dt>
+                  <dt>Development gateway:</dt>
                   <dd>https://pzjct85e0b.execute-api.ca-central-1.amazonaws.com/Development/</dd>
                 </div>
               </dl>
+              <p class="environment-note">
+                Replace this with the customer-facing API domain when a production
+                gateway alias is available.
+              </p>
             </div>
 
             <div class="language-card">
@@ -169,7 +173,30 @@
                 </label>
                 <button type="button" data-copy="create-user-request">Copy</button>
               </div>
-              <pre id="create-user-request"><code></code></pre>
+              <pre id="create-user-request"><code>curl --location 'https://pzjct85e0b.execute-api.ca-central-1.amazonaws.com/Development/create-users?PaginationToken=abc123' \
+  --header 'x-api-key: {{api_key_cognito}}' \
+  --header 'Content-Type: application/x-amz-json-1.1' \
+  --data-raw '{
+  "UserPoolId": "ca-central-1_f6q8dFnE2",
+  "Username": "testuser_from_api_002",
+  "DesiredDeliveryMediums": [],
+  "MessageAction": "SUPPRESS",
+  "TemporaryPassword": "AizanT@st1!",
+  "UserAttributes": [
+    {
+      "Name": "name",
+      "Value": "John"
+    },
+    {
+      "Name": "phone_number",
+      "Value": "+12065551213"
+    },
+    {
+      "Name": "email",
+      "Value": "kreva+test3@aizan.com"
+    }
+  ]
+}'</code></pre>
               <div class="try-row">
                 <button type="button">Try in API Explorer</button>
               </div>
@@ -208,7 +235,7 @@
               <div>
                 <code>AttributesToGet</code>
                 <span>array</span>
-                <p>Specifies the attributes to retrieve for each user in the list.</p>
+                <p>Array of attribute-name strings to return for each user, for example <code>["email", "sub"]</code>.</p>
               </div>
               <div>
                 <code>Filter</code>
@@ -256,7 +283,18 @@
                 </label>
                 <button type="button" data-copy="list-users-request">Copy</button>
               </div>
-              <pre id="list-users-request"><code></code></pre>
+              <pre id="list-users-request"><code>curl --location 'https://pzjct85e0b.execute-api.ca-central-1.amazonaws.com/Development/list-users' \
+  --header 'x-api-key: {{api_key_cognito}}' \
+  --header 'Content-Type: application/x-amz-json-1.1' \
+  --data-raw '{
+  "AttributesToGet": [
+    "email",
+    "sub"
+  ],
+  "Filter": "\"email\"^=\"kreva\"",
+  "Limit": 3,
+  "UserPoolId": "ca-central-1_f6q8dFnE2"
+}'</code></pre>
               <div class="try-row">
                 <button type="button">Try in API Explorer</button>
               </div>
@@ -266,7 +304,6 @@
       </main>
     </div>
 
-    <script src="app.js?v=userservice-1"></script>
+    <script src="app.js?v=userservice-2"></script>
   </body>
 </html>
-

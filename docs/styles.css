@@ -290,6 +290,15 @@ p {
   line-height: 1.55;
 }
 
+.param-list p code {
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: #f5f6f9;
+  color: #3a4049;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
 .feedback {
   display: inline-flex;
   flex-wrap: wrap;
@@ -363,6 +372,13 @@ p {
   color: #20242a;
   font-size: 15px;
   overflow-wrap: anywhere;
+}
+
+.environment-note {
+  margin: -6px 18px 18px;
+  color: #737b86;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .language-grid {
@@ -568,4 +584,3 @@ pre {
     padding: 12px;
   }
 }
-
