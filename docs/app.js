@@ -40,6 +40,80 @@ const endpoints = {
 }`
   }
 };
+const navLinks = Array.from(document.querySelectorAll(".section-nav a"));
+const sections = navLinks
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
+const searchInput = document.querySelector("#section-search");
+const searchStatus = document.querySelector("#search-status");
+const sectionSearchIndex = navLinks
+  .map((link) => {
+    const id = link.getAttribute("href")?.slice(1);
+    const section = id ? document.getElementById(id) : null;
+
+    if (!id || !section) return null;
+
+    return {
+      id,
+      text: `${link.textContent} ${id.replaceAll("-", " ")} ${section.textContent}`.toLowerCase()
+    };
+  })
+  .filter(Boolean);
+let activeSearchTarget = "";
+
+function setActiveNav(id) {
+  navLinks.forEach((link) => {
+    link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
+  });
+}
+
+function updateSearch(query) {
+  const visibleQuery = query.trim();
+  const normalizedQuery = visibleQuery.toLowerCase();
+
+  if (!normalizedQuery) {
+    navLinks.forEach((link) => link.classList.remove("is-search-hidden"));
+    sections.forEach((section) => section.classList.remove("is-search-hidden"));
+    searchStatus?.classList.remove("is-visible");
+    if (searchStatus) searchStatus.textContent = "";
+    activeSearchTarget = "";
+    return;
+  }
+
+  const matches = sectionSearchIndex.filter((section) => section.text.includes(normalizedQuery));
+  const matchingIds = new Set(matches.map((section) => section.id));
+
+  navLinks.forEach((link) => {
+    const id = link.getAttribute("href")?.slice(1);
+    link.classList.toggle("is-search-hidden", !matchingIds.has(id));
+  });
+
+  sections.forEach((section) => {
+    section.classList.toggle("is-search-hidden", !matchingIds.has(section.id));
+  });
+
+  if (searchStatus) {
+    const resultLabel = matches.length === 1 ? "result" : "results";
+    searchStatus.textContent = matches.length
+      ? `${matches.length} ${resultLabel} for "${visibleQuery}".`
+      : `No sections found for "${visibleQuery}".`;
+    searchStatus.classList.add("is-visible");
+  }
+
+  if (!matches.length) {
+    activeSearchTarget = "";
+    return;
+  }
+
+  const firstMatch = matches[0].id;
+  setActiveNav(firstMatch);
+
+  if (activeSearchTarget === firstMatch) return;
+
+  activeSearchTarget = firstMatch;
+  document.getElementById(firstMatch)?.scrollIntoView({ block: "start" });
+  history.replaceState(null, "", `#${firstMatch}`);
+}
 
 function headers() {
   return {
@@ -124,11 +198,8 @@ request.Content = new StringContent(${JSON.stringify(endpoint.body)}, Encoding.U
 using var response = await client.SendAsync(request);`;
 }
 
-document.querySelector("#section-search").addEventListener("input", (event) => {
-  const query = event.target.value.trim().toLowerCase();
-  document.querySelectorAll(".section-nav a").forEach((link) => {
-    link.hidden = query && !link.textContent.toLowerCase().includes(query);
-  });
+searchInput?.addEventListener("input", (event) => {
+  updateSearch(event.target.value);
 });
 
 document.addEventListener("keydown", (event) => {
@@ -136,7 +207,7 @@ document.addEventListener("keydown", (event) => {
   const activeTag = document.activeElement?.tagName;
   if (activeTag === "INPUT" || activeTag === "TEXTAREA" || activeTag === "SELECT") return;
   event.preventDefault();
-  document.querySelector("#section-search").focus();
+  searchInput?.focus();
 });
 
 document.querySelectorAll("[data-copy]").forEach((button) => {
